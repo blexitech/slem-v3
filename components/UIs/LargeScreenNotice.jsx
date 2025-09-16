@@ -4,7 +4,7 @@ import { Card } from "@/components/TEMPLATEs/card";
 
 export default function LargeScreenNotice() {
   return (
-    <div className="hidden md:flex fixed inset-0 z-[9998] items-center justify-center bg-black/70">
+    <div className="hidden md:flex fixed inset-0 z-[9998] items-center justify-center bg-black">
       <div className="max-w-[520px] w-[90%]">
         <Card
           variant="dots"
