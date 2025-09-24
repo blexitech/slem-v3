@@ -7,8 +7,15 @@ frontend:
     build:
       commands:
         - npm run build
+        - echo "Build completed, checking size..."
+        - du -sh .next
+        - echo "Creating deployment package..."
+        - mkdir -p deploy
+        - cp -r .next/* deploy/
+        - echo "Deployment package size:"
+        - du -sh deploy
   artifacts:
-    baseDirectory: .next
+    baseDirectory: deploy
     files:
       - '**/*'
   cache:
