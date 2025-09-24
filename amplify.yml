@@ -9,6 +9,8 @@ frontend:
         - "npm run build"
         - "echo Build completed, checking sizes..."
         - "du -sh .next || true"
+        - "echo Copy Next server trace files to artifact root..."
+        - "bash -lc 'for f in required-server-files.json next-server.js.nft.json next-minimal-server.js.nft.json BUILD_ID; do if [ -f .next/$f ]; then cp .next/$f ./; fi; done'"
   artifacts:
     baseDirectory: .
     files:
