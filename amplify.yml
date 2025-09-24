@@ -15,11 +15,9 @@ frontend:
         - echo "Total project size:"
         - du -sh .
         - echo "Cleaning up large files..."
-        - rm -rf node_modules
         - rm -rf .git
         - rm -f *.log
         - rm -f yarn.lock
-        - rm -f package-lock.json
         - echo "Final deployment size:"
         - du -sh .
   artifacts:
