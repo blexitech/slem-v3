@@ -7,12 +7,19 @@ frontend:
     build:
       commands:
         - npm run build
-        - echo "Build completed, checking size..."
+        - echo "Build completed, checking sizes..."
+        - echo "node_modules size:"
+        - du -sh node_modules || echo "node_modules not found"
+        - echo ".next size:"
         - du -sh .next
-        - echo "Creating deployment package..."
+        - echo "Total project size:"
+        - du -sh .
+        - echo "Creating clean deployment directory..."
         - mkdir -p deploy
-        - cp -r .next/* deploy/
-        - echo "Deployment package size:"
+        - cp -r .next deploy/
+        - cp -r public deploy/ 2>/dev/null || echo "No public directory"
+        - cp package.json deploy/
+        - echo "Deployment directory size:"
         - du -sh deploy
   artifacts:
     baseDirectory: deploy
