@@ -14,15 +14,16 @@ frontend:
         - du -sh .next
         - echo "Total project size:"
         - du -sh .
-        - echo "Creating clean deployment directory..."
-        - mkdir -p deploy
-        - cp -r .next deploy/
-        - cp -r public deploy/ 2>/dev/null || echo "No public directory"
-        - cp package.json deploy/
-        - echo "Deployment directory size:"
-        - du -sh deploy
+        - echo "Cleaning up large files..."
+        - rm -rf node_modules
+        - rm -rf .git
+        - rm -f *.log
+        - rm -f yarn.lock
+        - rm -f package-lock.json
+        - echo "Final deployment size:"
+        - du -sh .
   artifacts:
-    baseDirectory: deploy
+    baseDirectory: .
     files:
       - '**/*'
   cache:
