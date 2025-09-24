@@ -26,6 +26,10 @@ frontend:
         - cp -r public deploy/ 2>/dev/null || echo "No public directory"
         - cp package.json deploy/
         - cp package-lock.json deploy/
+        - # Amplify expects required-server-files.json at the artifact root
+        - cp .next/required-server-files.json deploy/ || echo "required-server-files.json already in place"
+        - # Include Next config at artifact root if present
+        - if [ -f next.config.mjs ]; then cp next.config.mjs deploy/; fi
         - echo "Deployment package size:"
         - du -sh deploy
   artifacts:
