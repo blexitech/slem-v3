@@ -3,35 +3,33 @@ frontend:
   phases:
     preBuild:
       commands:
-        - npm ci
+        - "npm ci"
     build:
       commands:
-        - npm run build
-        - echo "Build completed, checking sizes..."
-        - echo "node_modules size:"
-        - du -sh node_modules || echo "node_modules not found"
-        - echo ".next size:"
-        - du -sh .next
-        - echo "Total project size:"
-        - du -sh .
-        - echo "Cleaning up large files..."
-        - rm -rf .git
-        - rm -f *.log
-        - rm -f yarn.lock
-        - echo "Cleaning up .next cache..."
-        - rm -rf .next/cache
-        - echo "Creating deployment package..."
-        - mkdir -p deploy
-        - cp -r .next deploy/
-        - cp -r public deploy/ 2>/dev/null || echo "No public directory"
-        - cp package.json deploy/
-        - cp package-lock.json deploy/
-        - # Amplify expects required-server-files.json at the artifact root
-        - cp .next/required-server-files.json deploy/ || echo "required-server-files.json already in place"
-        - # Include Next config at artifact root if present
-        - if [ -f next.config.mjs ]; then cp next.config.mjs deploy/; fi
-        - echo "Deployment package size:"
-        - du -sh deploy
+        - "npm run build"
+        - "echo Build completed, checking sizes..."
+        - "echo node_modules size:"
+        - "du -sh node_modules || echo 'node_modules not found'"
+        - "echo .next size:"
+        - "du -sh .next"
+        - "echo Total project size:"
+        - "du -sh ."
+        - "echo Cleaning up large files..."
+        - "rm -rf .git"
+        - "rm -f *.log"
+        - "rm -f yarn.lock"
+        - "echo Cleaning up .next cache..."
+        - "rm -rf .next/cache"
+        - "echo Creating deployment package..."
+        - "mkdir -p deploy"
+        - "cp -r .next deploy/"
+        - "bash -lc 'if [ -d public ]; then cp -r public deploy/; else echo \"No public directory\"; fi'"
+        - "cp package.json deploy/"
+        - "bash -lc 'if [ -f package-lock.json ]; then cp package-lock.json deploy/; fi'"
+        - "bash -lc 'if [ -f .next/required-server-files.json ]; then cp .next/required-server-files.json deploy/; fi'"
+        - "bash -lc 'if [ -f next.config.mjs ]; then cp next.config.mjs deploy/; fi'"
+        - "echo Deployment package size:"
+        - "du -sh deploy"
   artifacts:
     baseDirectory: deploy
     files:
