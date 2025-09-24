@@ -26,7 +26,7 @@ frontend:
         - "bash -lc 'if [ -d public ]; then cp -r public deploy/; else echo \"No public directory\"; fi'"
         - "cp package.json deploy/"
         - "bash -lc 'if [ -f package-lock.json ]; then cp package-lock.json deploy/; fi'"
-        - "bash -lc 'if [ -f .next/required-server-files.json ]; then cp .next/required-server-files.json deploy/; fi'"
+        - "bash -lc 'for f in required-server-files.json next-server.js.nft.json next-minimal-server.js.nft.json BUILD_ID; do if [ -f .next/$f ]; then cp .next/$f deploy/; fi; done'"
         - "bash -lc 'if [ -f next.config.mjs ]; then cp next.config.mjs deploy/; fi'"
         - "echo Deployment package size:"
         - "du -sh deploy"
