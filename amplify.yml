@@ -8,32 +8,19 @@ frontend:
       commands:
         - "npm run build"
         - "echo Build completed, checking sizes..."
-        - "echo node_modules size:"
-        - "du -sh node_modules || echo 'node_modules not found'"
-        - "echo .next size:"
-        - "du -sh .next"
-        - "echo Total project size:"
-        - "du -sh ."
-        - "echo Cleaning up large files..."
-        - "rm -rf .git"
-        - "rm -f *.log"
-        - "rm -f yarn.lock"
-        - "echo Cleaning up .next cache..."
-        - "rm -rf .next/cache"
-        - "echo Creating deployment package..."
-        - "mkdir -p deploy"
-        - "cp -r .next deploy/"
-        - "bash -lc 'if [ -d public ]; then cp -r public deploy/; else echo \"No public directory\"; fi'"
-        - "cp package.json deploy/"
-        - "bash -lc 'if [ -f package-lock.json ]; then cp package-lock.json deploy/; fi'"
-        - "bash -lc 'for f in required-server-files.json next-server.js.nft.json next-minimal-server.js.nft.json BUILD_ID; do if [ -f .next/$f ]; then cp .next/$f deploy/; fi; done'"
-        - "bash -lc 'if [ -f next.config.mjs ]; then cp next.config.mjs deploy/; fi'"
-        - "echo Deployment package size:"
-        - "du -sh deploy"
+        - "du -sh .next || true"
   artifacts:
-    baseDirectory: deploy
+    baseDirectory: .
     files:
-      - '**/*'
+      - .next/**/*
+      - public/**/*
+      - package.json
+      - package-lock.json
+      - next.config.mjs
+      - required-server-files.json
+      - next-server.js.nft.json
+      - next-minimal-server.js.nft.json
+      - BUILD_ID
   cache:
     paths:
       - node_modules/**/*
