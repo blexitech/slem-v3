@@ -3,6 +3,7 @@ import { cookies } from "next/headers";
 export const dynamic = "force-dynamic";
 import ClientLayout from "@/app/clientLayout";
 import { GoogleAnalytics } from "@next/third-parties/google";
+import "web-streams-polyfill/polyfill";
 import { Card } from "@/components/TEMPLATEs/card";
 import LargeScreenNotice from "@/components/UIs/LargeScreenNotice";
 import MobileNav from "@/components/UIs/MobileNav";
