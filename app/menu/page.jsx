@@ -6,6 +6,7 @@ import "@reown/appkit/react";
 
 import ConnectWallet from "@/components/BUTTONs/ConnectWallet";
 import { MenuVertical } from "@/components/TEMPLATEs/menu-vertical";
+import GreetingBox from "@/components/UIs/GreetingBox";
 
 const Menu = () => {
   const menuItems= [
@@ -35,14 +36,8 @@ const Menu = () => {
 
   return (
     <main>
-      <section className="w-full flex justify-center mt-6">
-        <Image
-          className="w-[60vw]"
-          src="/assets/splash/splashLogo.png"
-          width={100}
-          height={100}
-          alt="Logo"
-        />
+      <section className="w-full flex justify-center mt-0">
+        <GreetingBox />
       </section>
        <ConnectWallet />
       <section className="w-full flex justify-center mt-20">
