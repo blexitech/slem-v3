@@ -1,36 +1,92 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# SLE Marketplace V3
 
-## Getting Started
+A decentralized marketplace built with Next.js, featuring mobile-first design and IPFS-based data storage.
 
-First, run the development server:
+## 🚀 Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **Decentralized Storage**: User data encrypted and stored on Pinata IPFS
+- **Mobile-First Design**: Optimized for mobile devices with responsive UI
+- **Profile Management**: Complete user profile system with image uploads
+- **Trust & Privacy**: Users maintain complete ownership of their data
+- **Web3 Integration**: Wallet connection and blockchain integration
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🏗️ Architecture
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+- **Frontend**: Next.js 14 with React
+- **Storage**: Pinata IPFS for decentralized file storage
+- **Database**: Supabase for metadata references
+- **Authentication**: Web3 wallet integration
+- **UI**: Tailwind CSS with custom components
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🛠️ Getting Started
 
-## Learn More
+### Prerequisites
 
-To learn more about Next.js, take a look at the following resources:
+- Node.js 18+ 
+- npm, yarn, or pnpm
+- Supabase account
+- Pinata account
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Installation
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. Clone the repository
+2. Install dependencies:
+   ```bash
+   npm install
+   # or
+   yarn install
+   # or
+   pnpm install
+   ```
 
-## Deploy on Vercel
+3. Set up environment variables in `.env.local`:
+   ```env
+   NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
+   NEXT_PUBLIC_SUPABASE_PUBLISHED_KEY=your_supabase_key
+   PINATA_JWT=your_pinata_jwt
+   PINATA_GATEWAY_KEY=your_pinata_gateway_key
+   ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+4. Run the development server:
+   ```bash
+   npm run dev
+   # or
+   yarn dev
+   # or
+   pnpm dev
+   ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+5. Open [http://localhost:3000](http://localhost:3000) in your browser
+
+## 📱 Mobile Optimization
+
+The application is designed mobile-first with:
+- Touch-friendly file uploads
+- Responsive image displays
+- Optimized text and spacing
+- Efficient use of screen real estate
+
+## 🔒 Privacy & Security
+
+- **Encrypted Storage**: All user data is encrypted before storage
+- **Decentralized**: Data stored on IPFS networks, not centralized servers
+- **User Ownership**: Users maintain complete control over their data
+- **No Access**: Platform has no access to user's personal information
+
+## 📚 Documentation
+
+- **Changelog**: See `components/CHANGELOGs/` for detailed version history
+- **Latest Version**: v3.0.6 - Mobile-First Profile Management
+
+## 🚀 Deployment
+
+The easiest way to deploy is using [Vercel](https://vercel.com/new):
+
+1. Push your code to GitHub
+2. Connect your repository to Vercel
+3. Add environment variables in Vercel dashboard
+4. Deploy!
+
+## 📄 License
+
+This project is licensed under the MIT License.
