@@ -7,6 +7,7 @@ import "web-streams-polyfill/polyfill";
 import { Card } from "@/components/TEMPLATEs/card";
 import LargeScreenNotice from "@/components/UIs/LargeScreenNotice";
 import MobileNav from "@/components/UIs/MobileNav";
+import "@/lib/errorHandler"; // Initialize global error filtering
 
 export default async function RootLayout({ children }) {
   const cookieStore = await cookies();

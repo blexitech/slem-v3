@@ -30,7 +30,7 @@ export default function ClientLayout({ children, isFirstVisit }) {
       swaps: true,
       onramp: true,
       history: true,
-      socials: true ["google", "discord", "apple", "x", "facebook"],
+      socials: ["google", "discord", "apple", "x", "facebook"],
       connectMethodsOrder: ["social", "wallet"],
       emailShowWallets: false,
     },
