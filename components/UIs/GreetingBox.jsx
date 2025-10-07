@@ -15,6 +15,7 @@ const GreetingBox = () => {
   const { getProfile } = usePinataNFTStorage();
 
   const [profileData, setProfileData] = useState(null);
+  console.log("User address:", address);
 
   const handleUserConnect = useCallback(async () => {
     try {
@@ -87,7 +88,7 @@ const GreetingBox = () => {
         )}
       </div>
       <div>
-        <Link href="/">
+        <Link href={`/profile/${address}`}>
           {profileData?.sensitiveData?.data?.profileImage ? (
             <img
               className="w-[20vw] h-[20vw] rounded-full object-cover border-2 border-amber-500"

@@ -52,6 +52,11 @@ const ProfileForm = ({
     coverImage: null,
   });
 
+  const [existingImages, setExistingImages] = useState({
+    profileImage: null,
+    coverImage: null,
+  });
+
   const [errors, setErrors] = useState({});
   const [loadingStage, setLoadingStage] = useState("");
   const [successMessage, setSuccessMessage] = useState(null);
@@ -89,6 +94,12 @@ const ProfileForm = ({
       dateOfBirth: initialData.dateOfBirth || "",
       profileImage: initialData.profileImage || "",
       coverImage: initialData.coverImage || "",
+    });
+
+    // Set existing images for display
+    setExistingImages({
+      profileImage: initialData.profileImage || null,
+      coverImage: initialData.coverImage || null,
     });
 
     // Reset image files and previews when form opens
@@ -211,8 +222,9 @@ const ProfileForm = ({
 
     try {
       // Upload images to Pinata first if they exist
-      let profileImageUrl = formData.profileImage;
-      let coverImageUrl = formData.coverImage;
+      let profileImageUrl =
+        existingImages.profileImage || formData.profileImage;
+      let coverImageUrl = existingImages.coverImage || formData.coverImage;
 
       if (imageFiles.profileImage) {
         setLoadingStage("Uploading profile image...");
@@ -337,6 +349,10 @@ const ProfileForm = ({
       profileImage: null,
       coverImage: null,
     });
+    setExistingImages({
+      profileImage: null,
+      coverImage: null,
+    });
     setErrors({});
     setSuccessMessage(null);
     setLoadingStage("");
@@ -363,9 +379,7 @@ const ProfileForm = ({
       <div className="bg-gray-900 rounded-lg shadow-xl w-full max-w-md max-h-[90vh] overflow-y-auto">
         {/* Header */}
         <div className="flex items-center justify-between p-6 border-b border-gray-700">
-          <h2 className="text-xl font-bold text-yellow-400">
-            Edit Profile (V3 - Pinata)
-          </h2>
+          <h2 className="text-xl font-bold text-yellow-400">Edit Profile</h2>
           <button
             onClick={handleClose}
             className="text-gray-400 hover:text-white transition-colors"
@@ -555,14 +569,34 @@ const ProfileForm = ({
               } focus:outline-none focus:ring-2 focus:ring-yellow-400`}
               disabled={loading}
             />
-            {imagePreviews.profileImage && (
+
+            {/* Show existing image or new preview */}
+            {(existingImages.profileImage || imagePreviews.profileImage) && (
               <div className="mt-2">
                 <img
-                  src={imagePreviews.profileImage}
-                  alt="Profile preview"
+                  src={
+                    imagePreviews.profileImage || existingImages.profileImage
+                  }
+                  alt={
+                    imagePreviews.profileImage
+                      ? "New profile preview"
+                      : "Current profile"
+                  }
                   className="w-20 h-20 rounded-full object-cover border-2 border-gray-600"
+                  onError={(e) => {
+                    e.target.style.display = "none";
+                    e.target.nextSibling.style.display = "block";
+                  }}
                 />
-                <p className="text-xs text-gray-400 mt-1">Preview</p>
+                <div
+                  style={{ display: "none" }}
+                  className="w-20 h-20 rounded-full border-2 border-gray-600 bg-gray-700 flex items-center justify-center"
+                >
+                  <span className="text-gray-400 text-xs">Invalid image</span>
+                </div>
+                <p className="text-xs text-gray-400 mt-1">
+                  {imagePreviews.profileImage ? "New preview" : "Current image"}
+                </p>
               </div>
             )}
             {errors.profileImage && (
@@ -589,14 +623,31 @@ const ProfileForm = ({
               } focus:outline-none focus:ring-2 focus:ring-yellow-400`}
               disabled={loading}
             />
-            {imagePreviews.coverImage && (
+            {/* Show existing image or new preview */}
+            {(existingImages.coverImage || imagePreviews.coverImage) && (
               <div className="mt-2">
                 <img
-                  src={imagePreviews.coverImage}
-                  alt="Cover preview"
+                  src={imagePreviews.coverImage || existingImages.coverImage}
+                  alt={
+                    imagePreviews.coverImage
+                      ? "New cover preview"
+                      : "Current cover"
+                  }
                   className="w-full h-24 object-cover rounded-lg border border-gray-600"
+                  onError={(e) => {
+                    e.target.style.display = "none";
+                    e.target.nextSibling.style.display = "block";
+                  }}
                 />
-                <p className="text-xs text-gray-400 mt-1">Preview</p>
+                <div
+                  style={{ display: "none" }}
+                  className="w-full h-24 rounded-lg border border-gray-600 bg-gray-700 flex items-center justify-center"
+                >
+                  <span className="text-gray-400 text-sm">Invalid image</span>
+                </div>
+                <p className="text-xs text-gray-400 mt-1">
+                  {imagePreviews.coverImage ? "New preview" : "Current image"}
+                </p>
               </div>
             )}
             {errors.coverImage && (
@@ -619,7 +670,7 @@ const ProfileForm = ({
               disabled={loading}
               className="px-4 py-2 bg-yellow-400 text-black rounded-md font-medium hover:bg-yellow-300 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200"
             >
-              {loading ? loadingStage || "Saving..." : "Save Changes (V3)"}
+              {loading ? loadingStage || "Saving..." : "Save Changes"}
             </button>
           </div>
         </form>
