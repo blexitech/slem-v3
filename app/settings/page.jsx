@@ -6,6 +6,7 @@ import { usePinataNFTStorage } from "../../lib/usePinataNFTStorage";
 import GreetingBox from "@/components/UIs/GreetingBox";
 import ProfileForm from "@/components/FORMs/ProfileForm";
 import ErrorBoundary from "@/components/UIs/ErrorBoundary";
+import Alert from "@/components/UIs/Alert";
 import {
   Tabs,
   TabsContent,
@@ -133,15 +134,12 @@ const SettingsPage = () => {
 
   if (!isConnected) {
     return (
-      <div className="w-full bg-black text-white">
-        <div className="max-w-2xl mx-auto">
-          <div className="bg-black border border-amber-500 p-6 rounded-lg">
-            <p className="text-center text-gray-400">
-              Please connect your wallet to access settings
-            </p>
-          </div>
-        </div>
-      </div>
+      <Alert
+        type="warning"
+        title="Wallet Not Connected"
+        message="Please connect your wallet to access your settings and manage your profile information."
+        note="Your wallet connection is required to view and edit your personal settings."
+      />
     );
   }
 
@@ -368,7 +366,7 @@ const SettingsPage = () => {
                         onClick={handleEditClick}
                         className="px-6 py-2 bg-amber-500 text-black rounded-md font-medium hover:bg-amber-400 transition-colors duration-200"
                       >
-                        Edit Profile (V3)
+                        Edit Profile
                       </button>
                     </div>
                   </div>
